@@ -18,9 +18,7 @@ const getProjectedNumbersByPeriodType = (
   return { infectionsByRequestedTime, periodInDays };
 };
 
-const toFinancial = number => {
-  return Number(number.toFixed(2));
-};
+const toFinancial = (number) => Number(number.toFixed(2));
 
 const generateImpactData = (data, type) => {
   const {
@@ -47,15 +45,15 @@ const generateImpactData = (data, type) => {
 
   const availableHospitalBeds = totalHospitalBeds * 35 * 0.01;
 
-  const hospitalBedsByRequestedTime =
-    availableHospitalBeds - severeCasesByRequestedTime;
+  const hospitalBedsByRequestedTime = availableHospitalBeds
+   - severeCasesByRequestedTime;
 
   const casesForICUByRequestedTime = infectionsByRequestedTime * 5 * 0.01;
 
-  const casesForVentilatorsByRequestedTime =
-    infectionsByRequestedTime * 2 * 0.01;
-  const dollarsInFlightFactor =
-    periodInDays * avgDailyIncomeInUSD * avgDailyIncomePopulation;
+  const casesForVentilatorsByRequestedTime = infectionsByRequestedTime
+   * 2 * 0.01;
+  const dollarsInFlightFactor = periodInDays
+   * avgDailyIncomeInUSD * avgDailyIncomePopulation;
   const dollarsInFlight = toFinancial(
     infectionsByRequestedTime * dollarsInFlightFactor
   );
@@ -63,10 +61,10 @@ const generateImpactData = (data, type) => {
   return {
     currentlyInfected,
     infectionsByRequestedTime,
-    severeCasesByRequestedTime: Math.trunc(severeCasesByRequestedTime),
-    hospitalBedsByRequestedTime: Math.trunc(hospitalBedsByRequestedTime),
-    casesForICUByRequestedTime: Math.trunc(casesForICUByRequestedTime),
-    casesForVentilatorsByRequestedTime: Math.trunc(
+    severeCasesByRequestedTime: Math.floor(severeCasesByRequestedTime),
+    hospitalBedsByRequestedTime: Math.floor(hospitalBedsByRequestedTime),
+    casesForICUByRequestedTime: Math.floor(casesForICUByRequestedTime),
+    casesForVentilatorsByRequestedTime: Math.floor(
       casesForVentilatorsByRequestedTime
     ),
     dollarsInFlight
