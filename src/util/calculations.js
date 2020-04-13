@@ -9,7 +9,7 @@ const getProjectedNumbersByPeriodType = (
   } else if (periodType === 'months') {
     timeToElapseInDays = timeToElapse * 30;
   }
-  const durationSet = Math.floor(timeToElapseInDays / 3);
+  const durationSet = Math.trunc(timeToElapseInDays / 3);
   const factor = 2 ** durationSet;
 
   const infectionsByRequestedTime = currentlyInfected * factor;
@@ -61,10 +61,10 @@ const generateImpactData = (data, type) => {
   return {
     currentlyInfected,
     infectionsByRequestedTime,
-    severeCasesByRequestedTime: Math.floor(severeCasesByRequestedTime),
-    hospitalBedsByRequestedTime: Math.floor(hospitalBedsByRequestedTime),
-    casesForICUByRequestedTime: Math.floor(casesForICUByRequestedTime),
-    casesForVentilatorsByRequestedTime: Math.floor(
+    severeCasesByRequestedTime: Math.trunc(severeCasesByRequestedTime),
+    hospitalBedsByRequestedTime: Math.trunc(hospitalBedsByRequestedTime),
+    casesForICUByRequestedTime: Math.trunc(casesForICUByRequestedTime),
+    casesForVentilatorsByRequestedTime: Math.trunc(
       casesForVentilatorsByRequestedTime
     ),
     dollarsInFlight
